@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         }
         const urlExists = await ShortUrl.findOne({ url: URL });
         if (urlExists) {
-          const newURL = "http://localhost:3000/api" + urlExists.shortid;
+          const newURL = "http://sh.anksus.me/api" + urlExists.shortid;
           res.status(200).json({ success: true, data: newURL });
           return;
         }
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         });
 
         const result = await newShortUrl.save();
-        const newURL = "http://localhost:3000/api/" + result.shortid;
+        const newURL = "http://sh.anksus.me/api/" + result.shortid;
 
         res.status(200).json({ success: true, data: newURL });
       } catch (error) {

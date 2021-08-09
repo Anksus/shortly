@@ -12,8 +12,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(inputUrl);
-    fetch("http://localhost:3000/api", {
+    fetch("http://sh.anksus.me/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
