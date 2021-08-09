@@ -12,7 +12,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://sh.anksus.me/api", {
+    fetch("https://sh.anksus.me/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
