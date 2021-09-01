@@ -3,6 +3,8 @@ import { Table, Input, InputNumber, Popconfirm, Form, Typography } from "antd";
 import _default from "antd/lib/message";
 import { signIn, signOut, useSession } from "next-auth/client";
 
+/* eslint-disable */
+
 const originData = [];
 
 const EditableCell = ({
@@ -47,17 +49,13 @@ const EditableTable = () => {
   const [editingKey, setEditingKey] = useState("");
   const email = session ? session.user.email : "";
   useEffect(() => {
-    fetch(
-      "https://sh.anksus.me/api/all",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email }),
+    fetch("https://sh.anksus.me/api/all", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      [email]
-    )
+      body: JSON.stringify({ email: email }),
+    })
       .then((res) => {
         res.json().then((d) => {
           const newData = d.map((res) => {
@@ -73,7 +71,7 @@ const EditableTable = () => {
       .catch((e) => {
         alert(e);
       });
-  }, []);
+  }, [email]);
 
   const isEditing = (record) => record.key === editingKey;
 
@@ -211,5 +209,6 @@ const EditableTable = () => {
     </Form>
   );
 };
+/* eslint-enable */
 
 export default EditableTable;
