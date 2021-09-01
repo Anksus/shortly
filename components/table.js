@@ -47,13 +47,17 @@ const EditableTable = () => {
   const [editingKey, setEditingKey] = useState("");
   const email = session ? session.user.email : "";
   useEffect(() => {
-    fetch("https://sh.anksus.me/api/all", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    fetch(
+      "https://sh.anksus.me/api/all",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: email }),
       },
-      body: JSON.stringify({ email: email }),
-    })
+      [email]
+    )
       .then((res) => {
         res.json().then((d) => {
           const newData = d.map((res) => {

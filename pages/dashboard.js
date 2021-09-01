@@ -26,7 +26,7 @@ const SiderDemo = () => {
     if (!session) {
       router.push("/");
     }
-  }, [session]);
+  }, [session, router]);
   return (
     <Layout className="yo">
       <Sider trigger={null} collapsible collapsed={collapsed}>
