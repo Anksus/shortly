@@ -16,6 +16,7 @@ export default async function handler(req, res) {
     case "POST":
       try {
         const URL = req.body.url;
+        const email = req.body.email;
         if (!URL) {
           throw new Error("No URL!");
         }
@@ -25,15 +26,14 @@ export default async function handler(req, res) {
           res.status(200).json({ success: true, data: newURL });
           return;
         }
-
         const newShortUrl = new ShortUrl({
           url: URL,
           shortid: ShortID.generate(),
+          email: email,
         });
 
         const result = await newShortUrl.save();
         const newURL = "https://sh.anksus.me/api/" + result.shortid;
-
         res.status(200).json({ success: true, data: newURL });
       } catch (error) {
         res.status(405).json({ success: false });

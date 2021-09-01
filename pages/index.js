@@ -1,15 +1,23 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import { Button, Tooltip } from "antd";
+import { signIn, signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const [session, loading] = useSession();
   const [inputUrl, setInputUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
+  const router = useRouter();
 
   const handleChange = (e) => {
     setInputUrl(e.target.value);
   };
-
+  const goToDashboard = () => {
+    router.push("/dashboard");
+  };
+  const email = session ? session.user.email : "";
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("https://sh.anksus.me/api", {
@@ -17,11 +25,10 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ url: inputUrl }),
+      body: JSON.stringify({ url: inputUrl, email: email }),
     })
       .then((res) => {
         res.json().then((d) => {
-          console.log(d.data);
           setShortUrl(d.data);
         });
       })
@@ -58,11 +65,32 @@ export default function Home() {
                 id="url"
                 placeholder="type url..."
               />
-              <button>Create link</button>
+              <Button type="primary" onClick={handleSubmit}>
+                Create Link
+              </Button>
+              {/* <button>Create link</button> */}
             </form>
           </div>
         </div>
         {shortUrl && <div>{shortUrl}</div>}
+        <div style={{ marginTop: "30px" }}>
+          <Tooltip title="Sign in to manage all the created URL's" color="red">
+            {!session && (
+              <Button
+                onClick={() =>
+                  signIn("google", { callbackUrl: "http://localhost:3000/" })
+                }
+              >
+                sign in
+              </Button>
+            )}
+          </Tooltip>
+        </div>
+        {session && (
+          <Button onClick={goToDashboard} style={{ marginTop: "10px" }}>
+            Dashboard
+          </Button>
+        )}
       </main>
 
       <footer className={styles.footer}>

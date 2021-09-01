@@ -10,6 +10,9 @@ const ShortUrlSchema = new Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+  },
 });
 
 export default mongoose.models.ShortUrl ||
