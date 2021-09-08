@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         }
         const urlExists = await ShortUrl.findOne({ url: URL });
         if (urlExists) {
-          const newURL = "https://sh.anksus.me/api" + urlExists.shortid;
+          const newURL = "https://sh.anksus.me/api/" + urlExists.shortid;
           res.status(200).json({ success: true, data: newURL });
           return;
         }
