@@ -11,9 +11,12 @@ export default function Home() {
   const [shortUrl, setShortUrl] = useState("");
   const router = useRouter();
 
+  // on click handler
   const handleChange = (e) => {
     setInputUrl(e.target.value);
   };
+  
+  // Dashboard function
   const goToDashboard = () => {
     router.push("/dashboard");
   };
