@@ -13,6 +13,7 @@ export default async function handler(req, res) {
       }
       res.send(allStuff);
     } catch (error) {
+//       console.log(error);
       console.log(error);
     }
   }
