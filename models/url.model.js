@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+// Schema decleration
 const ShortUrlSchema = new Schema({
   url: {
     type: String,
