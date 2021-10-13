@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 
 /* eslint-disable */
 
+// origin data initialisation
 const originData = [];
 
 const EditableCell = ({
@@ -41,7 +42,7 @@ const EditableCell = ({
     </td>
   );
 };
-
+// Edit table decleration
 const EditableTable = () => {
   const [session, loading] = useSession();
   const [form] = Form.useForm();
@@ -126,6 +127,7 @@ const EditableTable = () => {
       console.log("Validate Failed:", errInfo);
     }
   };
+  // columns
 
   const columns = [
     {
